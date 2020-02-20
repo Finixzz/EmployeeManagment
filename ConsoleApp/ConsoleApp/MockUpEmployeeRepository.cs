@@ -38,9 +38,9 @@ namespace ConsoleApp
                 employee.Id = employeeList.Max(c => c.Id) + 1;
             }
             employeeList.Add(employee);
-            Console.WriteLine("-----------------------------------------");
-            Console.WriteLine("Employee added succesfully to repository!");
-            Console.WriteLine("-----------------------------------------");
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine("Employee added successfully to repository!");
+            Console.WriteLine("------------------------------------------");
             return employee;
         }
 
@@ -56,6 +56,10 @@ namespace ConsoleApp
             }
             else
             {
+                employeeList.Remove(employeeInRepo);
+                Console.WriteLine("----------------------------------------------");
+                Console.WriteLine("Employee DELETED successfully from repository!");
+                Console.WriteLine("----------------------------------------------");
                 return employeeInRepo;
             }
             
@@ -76,9 +80,9 @@ namespace ConsoleApp
                 employeeInRepo.FirstName = employee.FirstName;
                 employeeInRepo.LastName = employee.LastName;
                 employeeInRepo.Department = employee.Department;
-                Console.WriteLine("----------------------------------");
-                Console.WriteLine("Employee data succesfully updated!");
-                Console.WriteLine("----------------------------------");
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("Employee data successfully updated!");
+                Console.WriteLine("-----------------------------------");
                 return employeeInRepo;
             }
         }
