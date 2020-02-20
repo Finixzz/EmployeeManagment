@@ -64,8 +64,7 @@ namespace ConsoleApp
                 switch (izbor)
                 {
                     case 1:
-                        Department department = departmentRepository.GetDepartment(1);
-                        Employee employee = new Employee(department);
+                        Department department;
                         Console.WriteLine("Select department type");
                         Console.WriteLine("----------------------");
                         for (int i = 0; i < departmentsInRepository.Count(); i++)
@@ -83,6 +82,7 @@ namespace ConsoleApp
                             deptId = Convert.ToInt32(Console.ReadLine());
                             department = departmentRepository.GetDepartment(deptId);
                         }
+                        Employee employee = new Employee(department);
                         employee.setEmployee(department);
                         employeeRepository.CreateEmployee(employee);
                         break;
