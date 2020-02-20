@@ -12,7 +12,7 @@ namespace ConsoleApp
             do
             {
                 Console.WriteLine("----------------------------");
-                Console.WriteLine("------EMPLOYEE Menu---------");
+                Console.WriteLine("---- EMPLOYEE CRUD MENU ----");
                 Console.WriteLine("----------------------------");
                 Console.Write("1) Create employee\n");
                 Console.Write("2) Edit employee\n");
@@ -40,7 +40,6 @@ namespace ConsoleApp
         
         static void printEmployeeRepo(List<Employee> employees)
         {
-            Console.WriteLine("-----------------------");
             Console.WriteLine("Employees in repository");
             Console.WriteLine("-----------------------");
             for(int i = 0; i < employees.Count(); i++)
@@ -56,6 +55,7 @@ namespace ConsoleApp
             IDepartmentRepository departmentRepository = CreateDepartmentRepository();
             IEmployeeRepository employeeRepository = CreateEmployeeRepository();
             var departmentsInRepository = departmentRepository.GetDepartments();
+            var employeesInRepository = employeeRepository.GetEmployees();
             int izbor;
             bool programFlow = true;
             do
@@ -97,7 +97,6 @@ namespace ConsoleApp
                         while (employeeInRepo == null)
                         {
                             Console.Write("Input employee id: ");
-                            employeeId = Convert.ToInt32(Console.ReadLine());
                             employeeInRepo = employeeRepository.GetEmployee(employeeId);
                         }
                         Console.WriteLine("Select department type");
@@ -121,22 +120,52 @@ namespace ConsoleApp
                         break;
 
                     case 3:
+                        Console.WriteLine("---------------------------");
+                        Console.WriteLine("Employee ID's in repository");
+                        Console.WriteLine("---------------------------");
+                        for (int i = 0; i < employeesInRepository.Count(); i++)
+                        {
+                            Console.WriteLine("ID: "+employeesInRepository[i].Id);
+                            Console.WriteLine("------");
+                        }
+                        Console.Write("Input employee ID to see employee details: ");
+                        employeeId = Convert.ToInt32(Console.ReadLine());
+                        employeeInRepo = employeeRepository.GetEmployee(employeeId);
+                        while (employeeInRepo == null)
+                        {
+                            Console.Write("Input employee id: ");
+                            employeeId = Convert.ToInt32(Console.ReadLine());
+                            employeeInRepo = employeeRepository.GetEmployee(employeeId);
+                        }
+                        employeeInRepo.printEmployeeInfo();
                         break;
 
                     case 4:
+                        printEmployeeRepo(employeesInRepository);
                         break;
 
                     case 5:
+                        Console.WriteLine("---------------------------");
+                        Console.WriteLine("Employee ID's in repository");
+                        Console.WriteLine("---------------------------");
+                        for (int i = 0; i < employeesInRepository.Count(); i++)
+                        {
+                            Console.WriteLine("ID: " + employeesInRepository[i].Id);
+                            Console.WriteLine("------");
+                        }
+                        Console.Write("Input employee ID to delete same: ");
+                        employeeId = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Are you sure you want to delete this employee?(Y/N): ");
+                        string confirm = Console.ReadLine();
+                        if (confirm=="Y" || confirm=="y")
+                        {
+                            employeeRepository.DeleteEmployee(employeeId);
+                        }
                         break;
 
                     case 6:
                         programFlow = false;
                         break;
-
-
-
-
-
                 }
                 Console.WriteLine("Press any key to continue");
                 Console.ReadKey();
