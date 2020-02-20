@@ -89,77 +89,113 @@ namespace ConsoleApp
 
 
                     case 2:
-                        printEmployeeRepo(employeeRepository.GetEmployees());
-                        int employeeId;
-                        Console.Write("Input employee id: ");
-                        employeeId = Convert.ToInt32(Console.ReadLine());
-                        Employee employeeInRepo = employeeRepository.GetEmployee(employeeId);
-                        while (employeeInRepo == null)
+                        if (employeesInRepository.Count() == 0)
                         {
+                            Console.WriteLine("-----------------------------");
+                            Console.WriteLine("Employee repository is empty!");
+                            Console.WriteLine("-----------------------------");
+                        }
+                        else
+                        {
+                            printEmployeeRepo(employeeRepository.GetEmployees());
                             Console.Write("Input employee id: ");
-                            employeeInRepo = employeeRepository.GetEmployee(employeeId);
-                        }
-                        Console.WriteLine("Select department type");
-                        Console.WriteLine("----------------------");
-                        for (int i = 0; i < departmentsInRepository.Count(); i++)
-                        {
-                            departmentsInRepository[i].printDepartmentInfo();
-                        }
-                        Console.WriteLine("----------------------");
-                        Console.Write("Input department id: ");
-                        deptId = Convert.ToInt32(Console.ReadLine());
-                        department = departmentRepository.GetDepartment(deptId);
-                        while (department == null)
-                        {
+                            int employeeId = Convert.ToInt32(Console.ReadLine());
+                            Employee employeeInRepo = employeeRepository.GetEmployee(employeeId);
+                            while (employeeInRepo == null)
+                            {
+                                Console.Write("Input employee id: ");
+                                employeeInRepo = employeeRepository.GetEmployee(employeeId);
+                            }
+                            Console.WriteLine("Select department type");
+                            Console.WriteLine("----------------------");
+                            for (int i = 0; i < departmentsInRepository.Count(); i++)
+                            {
+                                departmentsInRepository[i].printDepartmentInfo();
+                            }
+                            Console.WriteLine("----------------------");
                             Console.Write("Input department id: ");
                             deptId = Convert.ToInt32(Console.ReadLine());
                             department = departmentRepository.GetDepartment(deptId);
+                            while (department == null)
+                            {
+                                Console.Write("Input department id: ");
+                                deptId = Convert.ToInt32(Console.ReadLine());
+                                department = departmentRepository.GetDepartment(deptId);
+                            }
+                            employeeInRepo.setEmployee(department);
+                            employeeRepository.EditEmployee(employeeInRepo);
                         }
-                        employeeInRepo.setEmployee(department);
-                        employeeRepository.EditEmployee(employeeInRepo);
+                       
                         break;
 
                     case 3:
-                        Console.WriteLine("---------------------------");
-                        Console.WriteLine("Employee ID's in repository");
-                        Console.WriteLine("---------------------------");
-                        for (int i = 0; i < employeesInRepository.Count(); i++)
+                        if (employeesInRepository.Count() == 0)
                         {
-                            Console.WriteLine("ID: "+employeesInRepository[i].Id);
-                            Console.WriteLine("------");
+                            Console.WriteLine("-----------------------------");
+                            Console.WriteLine("Employee repository is empty!");
+                            Console.WriteLine("-----------------------------");
                         }
-                        Console.Write("Input employee ID to see employee details: ");
-                        employeeId = Convert.ToInt32(Console.ReadLine());
-                        employeeInRepo = employeeRepository.GetEmployee(employeeId);
-                        while (employeeInRepo == null)
+                        else
                         {
-                            Console.Write("Input employee id: ");
-                            employeeId = Convert.ToInt32(Console.ReadLine());
-                            employeeInRepo = employeeRepository.GetEmployee(employeeId);
+                            Console.WriteLine("---------------------------");
+                            Console.WriteLine("Employee ID's in repository");
+                            Console.WriteLine("---------------------------");
+                            for (int i = 0; i < employeesInRepository.Count(); i++)
+                            {
+                                Console.WriteLine("ID: " + employeesInRepository[i].Id);
+                                Console.WriteLine("------");
+                            }
+                            Console.Write("Input employee ID to see employee details: ");
+                            int employeeId = Convert.ToInt32(Console.ReadLine());
+                            Employee employeeInRepo = employeeRepository.GetEmployee(employeeId);
+                            while (employeeInRepo == null)
+                            {
+                                Console.Write("Input employee id: ");
+                                employeeId = Convert.ToInt32(Console.ReadLine());
+                                employeeInRepo = employeeRepository.GetEmployee(employeeId);
+                            }
+                            employeeInRepo.printEmployeeInfo();
                         }
-                        employeeInRepo.printEmployeeInfo();
                         break;
 
                     case 4:
-                        printEmployeeRepo(employeesInRepository);
+                        if (employeesInRepository.Count() == 0)
+                        {
+                            Console.WriteLine("-----------------------------");
+                            Console.WriteLine("Employee repository is empty!");
+                            Console.WriteLine("-----------------------------");
+                        }
+                        else
+                        {
+                            printEmployeeRepo(employeesInRepository);
+                        }
                         break;
 
                     case 5:
-                        Console.WriteLine("---------------------------");
-                        Console.WriteLine("Employee ID's in repository");
-                        Console.WriteLine("---------------------------");
-                        for (int i = 0; i < employeesInRepository.Count(); i++)
+                        if (employeesInRepository.Count() == 0)
                         {
-                            Console.WriteLine("ID: " + employeesInRepository[i].Id);
-                            Console.WriteLine("------");
+                            Console.WriteLine("-----------------------------");
+                            Console.WriteLine("Employee repository is empty!");
+                            Console.WriteLine("-----------------------------");
                         }
-                        Console.Write("Input employee ID to delete same: ");
-                        employeeId = Convert.ToInt32(Console.ReadLine());
-                        Console.Write("Are you sure you want to delete this employee?(Y/N): ");
-                        string confirm = Console.ReadLine();
-                        if (confirm=="Y" || confirm=="y")
+                        else
                         {
-                            employeeRepository.DeleteEmployee(employeeId);
+                            Console.WriteLine("---------------------------");
+                            Console.WriteLine("Employee ID's in repository");
+                            Console.WriteLine("---------------------------");
+                            for (int i = 0; i < employeesInRepository.Count(); i++)
+                            {
+                                Console.WriteLine("ID: " + employeesInRepository[i].Id);
+                                Console.WriteLine("------");
+                            }
+                            Console.Write("Input employee ID to delete same: ");
+                            int employeeId = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Are you sure you want to delete this employee?(Y/N): ");
+                            string confirm = Console.ReadLine();
+                            if (confirm == "Y" || confirm == "y")
+                            {
+                                employeeRepository.DeleteEmployee(employeeId);
+                            }
                         }
                         break;
 
