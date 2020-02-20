@@ -29,6 +29,14 @@ namespace ConsoleApp
 
         public Employee CreateEmployee(Employee employee)
         {
+            if (employeeList.Count() == 0)
+            {
+                employee.Id = 1;
+            }
+            else
+            {
+                employee.Id = employeeList.Max(c => c.Id) + 1;
+            }
             employeeList.Add(employee);
             Console.WriteLine("-----------------------------------------");
             Console.WriteLine("Employee added succesfully to repository!");
