@@ -37,6 +37,20 @@ namespace ConsoleApp
             return new MockUpEmployeeRepository(CreateDepartmentRepository());
         }
 
+        
+        static void printEmployeeRepo(List<Employee> employees)
+        {
+            Console.WriteLine("-----------------------");
+            Console.WriteLine("Employees in repository");
+            Console.WriteLine("-----------------------");
+            for(int i = 0; i < employees.Count(); i++)
+            {
+                employees[i].printEmployeeInfo();
+                Console.WriteLine("---------------");
+            }
+        }
+        
+
         static void Main(string[] args)
         {
             IDepartmentRepository departmentRepository = CreateDepartmentRepository();
@@ -54,7 +68,7 @@ namespace ConsoleApp
                         Employee employee = new Employee(department);
                         Console.WriteLine("Select department type");
                         Console.WriteLine("----------------------");
-                        for(int i = 0; i < departmentsInRepository.Count(); i++)
+                        for (int i = 0; i < departmentsInRepository.Count(); i++)
                         {
                             departmentsInRepository[i].printDepartmentInfo();
                         }
@@ -75,6 +89,35 @@ namespace ConsoleApp
 
 
                     case 2:
+                        printEmployeeRepo(employeeRepository.GetEmployees());
+                        int employeeId;
+                        Console.Write("Input employee id: ");
+                        employeeId = Convert.ToInt32(Console.ReadLine());
+                        Employee employeeInRepo = employeeRepository.GetEmployee(employeeId);
+                        while (employeeInRepo == null)
+                        {
+                            Console.Write("Input employee id: ");
+                            employeeId = Convert.ToInt32(Console.ReadLine());
+                            employeeInRepo = employeeRepository.GetEmployee(employeeId);
+                        }
+                        Console.WriteLine("Select department type");
+                        Console.WriteLine("----------------------");
+                        for (int i = 0; i < departmentsInRepository.Count(); i++)
+                        {
+                            departmentsInRepository[i].printDepartmentInfo();
+                        }
+                        Console.WriteLine("----------------------");
+                        Console.Write("Input department id: ");
+                        deptId = Convert.ToInt32(Console.ReadLine());
+                        department = departmentRepository.GetDepartment(deptId);
+                        while (department == null)
+                        {
+                            Console.Write("Input department id: ");
+                            deptId = Convert.ToInt32(Console.ReadLine());
+                            department = departmentRepository.GetDepartment(deptId);
+                        }
+                        employeeInRepo.setEmployee(department);
+                        employeeRepository.EditEmployee(employeeInRepo);
                         break;
 
                     case 3:
