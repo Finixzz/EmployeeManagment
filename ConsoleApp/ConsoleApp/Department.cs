@@ -9,6 +9,9 @@ namespace ConsoleApp
         public int Id { get; set; }
         public String Name { get; set; }
 
-        
+        public void printDepartmentInfo()
+        {
+            Console.WriteLine("ID: "+Id+" , Name: "+Name);
+        }
     }
 }

@@ -27,16 +27,16 @@ namespace ConsoleApp
             Console.Write("Input employees last name: ");
             this.LastName = Console.ReadLine();
         }
-        private void setDepartment()
+        private void setDepartment(Department department)
         {
-
+            Department = department;
         }
 
-        public void setEmployee()
+        public void setEmployee(Department department)
         {
             this.setFirstName();
             this.setLastName();
-            this.setDepartment();
+            this.setDepartment(department);
         }
     }
 }
