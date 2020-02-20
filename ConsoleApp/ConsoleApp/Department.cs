@@ -7,10 +7,8 @@ namespace ConsoleApp
     public class Department
     {
         public int Id { get; set; }
-        public int Name { get; set; }
-
+        public String Name { get; set; }
 
         
-
     }
 }
