@@ -30,6 +30,9 @@ namespace ConsoleApp
         public Employee CreateEmployee(Employee employee)
         {
             employeeList.Add(employee);
+            Console.WriteLine("-----------------------------------------");
+            Console.WriteLine("Employee added succesfully to repository!");
+            Console.WriteLine("-----------------------------------------");
             return employee;
         }
 
@@ -38,7 +41,9 @@ namespace ConsoleApp
             Employee employeeInRepo = employeeList.SingleOrDefault(c => c.Id == id);
             if(employeeInRepo==null)
             {
+                Console.WriteLine("--------------------");
                 Console.WriteLine("Invalid employee ID!");
+                Console.WriteLine("--------------------");
                 return null;
             }
             else
@@ -53,7 +58,9 @@ namespace ConsoleApp
             Employee employeeInRepo = employeeList.SingleOrDefault(c => c.Id == employee.Id);
             if (employeeInRepo == null)
             {
+                Console.WriteLine("--------------------");
                 Console.WriteLine("Invalid employee ID!");
+                Console.WriteLine("--------------------");
                 return null;
             }
             else
@@ -61,7 +68,9 @@ namespace ConsoleApp
                 employeeInRepo.FirstName = employee.FirstName;
                 employeeInRepo.LastName = employee.LastName;
                 employeeInRepo.Department = employee.Department;
+                Console.WriteLine("----------------------------------");
                 Console.WriteLine("Employee data succesfully updated!");
+                Console.WriteLine("----------------------------------");
                 return employeeInRepo;
             }
         }
@@ -71,7 +80,9 @@ namespace ConsoleApp
             Employee employeeInRepo = employeeList.SingleOrDefault(c => c.Id == id);
             if (employeeInRepo == null)
             {
+                Console.WriteLine("--------------------");
                 Console.WriteLine("Invalid employee ID!");
+                Console.WriteLine("--------------------");
                 return null;
             }
             else
@@ -80,7 +91,7 @@ namespace ConsoleApp
             }
         }
 
-        public IEnumerable<Employee> GetEmployees()
+        List<Employee> IEmployeeRepository.GetEmployees()
         {
             return employeeList;
         }

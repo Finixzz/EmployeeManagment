@@ -23,13 +23,16 @@ namespace ConsoleApp
             Department departmentInRepo = departmentList.SingleOrDefault(c => c.Id == id);
             if(departmentInRepo==null)
             {
+                Console.WriteLine("----------------------");
                 Console.WriteLine("Invalid department id!");
+                Console.WriteLine("----------------------");
                 return null;
             }
             return departmentInRepo;
         }
 
-        public IEnumerable<Department> GetDepartments()
+
+        List<Department> IDepartmentRepository.GetDepartments()
         {
             return departmentList;
         }
