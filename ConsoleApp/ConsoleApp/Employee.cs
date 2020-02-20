@@ -38,5 +38,13 @@ namespace ConsoleApp
             this.setLastName();
             this.setDepartment(department);
         }
+
+        public void printEmployeeInfo()
+        {
+            Console.WriteLine("ID: " + this.Id);
+            Console.WriteLine("First Name: " + this.FirstName);
+            Console.WriteLine("Last Name: " + this.LastName);
+            Console.WriteLine("Department: "+Department.Name);
+        }
     }
 }
