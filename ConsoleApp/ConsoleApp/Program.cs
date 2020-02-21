@@ -104,6 +104,7 @@ namespace ConsoleApp
                             while (employeeInRepo == null)
                             {
                                 Console.Write("Input employee id: ");
+                                employeeId = Convert.ToInt32(Console.ReadLine());
                                 employeeInRepo = employeeRepository.GetEmployee(employeeId);
                             }
                             Console.WriteLine("Select department type");
